@@ -82,7 +82,7 @@ include("../views/header.php");
 								<br />
 								<label>Select User Image</label>
 								<input type="file" name="student_pdf" id="student_pdf" />
-								<span id="user_uploaded_image"></span>
+								<span id="user_uploaded_pdf"></span>
 								
 								<input type="hidden" name="ExamTitle" id="ExamTitle" class="form-control " />
 								<input type="hidden" name="Duration" id="Duration" class="form-control " />
@@ -130,9 +130,19 @@ $(document).ready(function(){
 		var ExamType = $('#ExamType').val();
 		var Examdate = $('#Examdate').val();
 		var Module_Cod = $('#Module_Cod').val();
-
-		if(ExamTitle != '' && Duration != '')
+		var extension = $('#student_pdf').val().split('.').pop().toLowerCase();
+		var Operations =$('#operation').val();
+		if(extension != '')
 		{
+			if(jQuery.inArray(extension, ['pdf']) == -1)
+			{
+				alert("Invalid File please upload .pdf file");
+				$('#student_pdf').val('');
+				return false;
+			}
+		}	
+
+		
 			$.ajax({
 				url:"Student_functions/Submit_Exam.php",
 				method:'POST',
@@ -141,21 +151,19 @@ $(document).ready(function(){
 				processData:false,
 				success:function(data)
 				{
-					alert(data);
+					//alert(data);
 					$('#exam_Form')[0].reset();
 					$('#examModal').modal('hide');
 					dataTable.ajax.reload();
 				}
 			});
-		}
-		else
-		{
-			alert("Both Fields are Required");
-		}
+		
+	
 	});
 	
 	$(document).on('click', '.update', function(){
 		var Exam_id = $(this).attr("id");
+
 		
 		$.ajax({
 			url:"Student_functions/fetch_single.php",			
@@ -178,48 +186,54 @@ $(document).ready(function(){
 				$('#Exam_id').val(Exam_id);
 				$('#action').val("Submit");
 				$('#operation').val("Edit");
+				
+				
+				var Duration = $('#Duration').val();
+				// 10 minutes from now
+
+				var time_in_minutes = 1;
+				time_in_minutes =Duration
+				var current_time = Date.parse(new Date());
+				var deadline = new Date(current_time + time_in_minutes*60*1000);
+
+
+				function time_remaining(endtime){
+					var t = Date.parse(endtime) - Date.parse(new Date());
+					var seconds = Math.floor( (t/1000) % 60 );
+					var minutes = Math.floor( (t/1000/60) % 60 );
+					var hours = Math.floor( (t/(1000*60*60)) % 24 );
+
+					return {'total':t,'hours':hours, 'minutes':minutes, 'seconds':seconds};
+				}
+				function run_clock(id,endtime){
+					var clock = document.getElementById(id);
+					function update_clock(){
+						var t = time_remaining(endtime);
+						clock.innerHTML = 'hour: ' +t.hours+ ' : '+t.minutes+' : '+t.seconds;
+						
+						//check if the timmer is 0 and if its 0 update the test record and close the Exam modal
+						if(t.total<=0){ 
+						clearInterval(timeinterval); 
+						$('#action').val("Submit");
+						$('#operation').val("TimeUp");
+						document.getElementById("action").click();
+							
+						}
+					}
+					update_clock(); // run function once at first to avoid delay
+					var timeinterval = setInterval(update_clock,1000);
+				}
+				run_clock('clockdiv',deadline);
+				
+				
 			}
 		})
+	
 	});
 	
 
 });
 
-// 10 minutes from now
-var time_in_minutes = 60;
-var current_time = Date.parse(new Date());
-var deadline = new Date(current_time + time_in_minutes*60*1000);
-
-
-function time_remaining(endtime){
-	var t = Date.parse(endtime) - Date.parse(new Date());
-	var seconds = Math.floor( (t/1000) % 60 );
-	var minutes = Math.floor( (t/1000/60) % 60 );
-	var hours = Math.floor( (t/(1000*60*60)) % 24 );
-
-	return {'total':t,'hours':hours, 'minutes':minutes, 'seconds':seconds};
-}
-function run_clock(id,endtime){
-	var clock = document.getElementById(id);
-	function update_clock(){
-		var t = time_remaining(endtime);
-		clock.innerHTML = 'hour: ' +t.hours+ ' : '+t.minutes+' : '+t.seconds;
-		
-		//check if the timmer is 0 and if its 0 update the test record and close the Exam modal
-		if(t.total<=0){ 
-		clearInterval(timeinterval); 
-		$('#action').val("Submit");
-		$('#operation').val("21");
-		document.getElementById("action").click();
-		
-	
-		
-		}
-	}
-	update_clock(); // run function once at first to avoid delay
-	var timeinterval = setInterval(update_clock,1000);
-}
-run_clock('clockdiv',deadline);
 
 
 </script>

@@ -86,12 +86,12 @@ include("../views/header.php");
 							<label for="Duration" class="control-label">Duration</label>
 							<select name="Duration" id="Duration" class="form-control">
 	                				<option value="">Select</option>
-									<option value="00:01:00">1 Minute</option>									
-									<option value="00:03:00">3 Minute</option>								
-	                				<option value="00:30:00">30 Minute</option>
-	                				<option value="01:00:00">1 Hour</option>
-	                				<option value="02:00:00">2 Hour</option>
-	                				<option value="04:00:00">4 Hour</option>
+									<option value="1">1 Minute</option>									
+									<option value="3">3 Minute</option>								
+	                				<option value="30">30 Minute</option>
+	                				<option value="60">1 Hour</option>
+	                				<option value="120">2 Hour</option>
+	                				<option value="240">4 Hour</option>
 	                			</select>	
 						</div>
 						
