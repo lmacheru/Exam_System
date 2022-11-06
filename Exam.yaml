@@ -1,0 +1,14 @@
+- name: "/user"
+  method : POST
+  function:
+   User
+   create
+  fields:
+   username
+   email
+   password
+- name: "/user/@id"
+  method: GET
+  function:
+   User
+   get
