@@ -25,7 +25,7 @@ require_once "../models/connection.php";
 ?>
 <div class="content">
 		<div class="container">
-
+<?php include('top_menus.php'); ?>	
 				<div class="row">
 
 					<div class="col-md-12">

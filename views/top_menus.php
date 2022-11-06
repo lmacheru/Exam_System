@@ -12,16 +12,30 @@ if($_SESSION["username"])
 <ul class="nav nav-tabs">	
 	<?php 
 	
-	if($_SESSION["role"] == 'admin') { ?>
+	if($_SESSION["role"] == 'Administrator') { ?>
 	
-			<button type="button" name="exam" id="exam" class="btn btn-info"  onclick='window.location.replace("Set-ExamPage.php")'>
+			<button type="button" name="exam" id="exam" class="btn btn-info"  onclick='window.location.replace("Lecture_Page.php")'>
 			  Schedule Exam
 			</button>
 			
 			<button type="button" name="User" id="user" class="btn btn-info"  onclick='window.location.replace("ManageUsers.php")'>
 			  Manage Users
 			</button>				
-	<?php } ?>	
+	<?php } else if($_SESSION["role"] == 'Lecture') {?>	
+			
+			<button type="button" name="exam" id="exam" class="btn btn-info"  onclick='window.location.replace("Lecture_Page.php")'>
+			  Schedule Exam
+			</button>
+			
+			<button type="button" name="User" id="user" class="btn btn-info"  onclick='window.location.replace("ManageStudents.php")'>
+			  Manage Students
+			</button>	
+			
+			<button type="button" name="User" id="user" class="btn btn-info"  onclick='window.location.replace("ManageModules.php")'>
+			  Manage Modules
+			</button>
+			<?php }?>
+	
 	<?php if($_SESSION["role"] == 'Student') { ?>
 	<button type="button" name="Dashboard" id="Dashboard" class="btn btn-info"  onclick='window.location.replace("student-dashboard.php")'>
 			  Dashboard

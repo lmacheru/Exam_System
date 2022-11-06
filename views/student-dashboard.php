@@ -40,8 +40,7 @@ include("../views/header.php");
 <div class="container" style="background-color:#f4f3ef;">  
 	<?php include('top_menus.php'); ?>	
 	<br>
-		
-	
+			
 	<div> 	
 
 		<table id="Exam_data" class="table table-bordered table-striped">
@@ -70,9 +69,10 @@ include("../views/header.php");
 						
 								<h4 class="modal-title">Submit PDF</h4>
 							</div>
-<br><br>
-<div id="clockdiv"></div>
-<br><br>								
+							<!--clockdiv shows the count downtimer on the upload Exam model-->
+							<br><br>
+							<div id="clockdiv"></div>
+							<br><br>								
 							<div class="modal-body">
 								<label>Enter Student Number</label>
 								<input type="text" name="Student_Num" id="Student_Num" class="form-control" value="<?php echo substr($_SESSION["username"],0,8);?>"/>

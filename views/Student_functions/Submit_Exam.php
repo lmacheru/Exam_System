@@ -14,6 +14,8 @@ if(isset($_POST["operation"]))
 	
 	$StudentNum =$_POST["Student_Num"];
 	$ModuleCode =$_POST["Module_Cod"];
+	$Starttime =substr($_POST["Examdate"],11);
+	
 	if($_POST["operation"] == "Edit")
 	{
 		
@@ -40,7 +42,7 @@ if(isset($_POST["operation"]))
 		move_uploaded_file($_FILES['student_pdf']['tmp_name'], $destination);
 		}
 		$statement = $connection->prepare("INSERT INTO examoutput(startTime,uploadTime,examDate,answerPaperPDF,studentNumber,moduleCode) 
-		VALUES('11:59:00','$uploadtime','$CurrrentDate','$file_name','$StudentNum','$ModuleCode')
+		VALUES('$Starttime','$uploadtime','$CurrrentDate','$file_name','$StudentNum','$ModuleCode')
 		");
 		$result = $statement->execute(
 			array(

@@ -81,18 +81,18 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                                         //this if statement checks if the user from staff is from exam department or is a lecturer
                                         if($Is_staff == "Y"){
                                             //if the person is a staff member we open the Set-ExamPage
-                                            header("Location: views/Set-ExamPage.php");
+                                            header("Location: views/Exam_Admin.php");
 											  
 											session_start();
 
-											$_SESSION["role"] = 'admin';   
+											$_SESSION["role"] = 'Administrator';   
 
 
                                         }
                                         else{
                                             //if the person is a lecturer  we open the admin-home page that shows dashboard
-                                             header("location: views/Lecture-Home.php");
-											 $_SESSION["role"] = 'user';   
+                                             header("location: views/Lecture_Page.php");
+											 $_SESSION["role"] = 'Lecture';   
                                         } 
 								  
 								 

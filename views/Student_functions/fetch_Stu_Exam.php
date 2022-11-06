@@ -39,7 +39,11 @@ foreach($result as $row)
 	$sub_array[] = $row["ExamDate"];
 	$sub_array[] = $row["ModuleCode"];
 	
-	if($row["Status"] =='Completed' ||$row["Status"] == 'Not Completed'){
+	//get Date and time to use when the exam button should be enabled 
+	date_default_timezone_set("Africa/Johannesburg");
+	$ExamStartime =date("Y-m-d h:i:s");
+	
+	if($row["Status"] =='Completed' ||$row["Status"] == 'Not Completed' || $row["ExamDate"] >=$ExamStartime){
 	$sub_array[] = '<button type="button" name="Close" id="'.$row["Id"].'" class="bbtn btn-success" disabled>Closed</button>';
 	}
 	else{
