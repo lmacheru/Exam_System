@@ -1,14 +1,14 @@
 <?php
-include('db.php');
+include('../Admin_functions/db.php');
 include('function.php');
 $query = '';
 $output = array();
-$query .= "SELECT * FROM staffinfo ";
+$query .= "SELECT * FROM studentinfo ";
 
 if(isset($_POST["search"]["value"]))
 {
-	$query .= 'WHERE staffName LIKE "%'.$_POST["search"]["value"].'%" ';
-	$query .= 'OR staffName LIKE "%'.$_POST["search"]["value"].'%" ';
+	$query .= 'WHERE studentNumber LIKE "%'.$_POST["search"]["value"].'%" ';
+	$query .= 'OR studentName LIKE "%'.$_POST["search"]["value"].'%" ';
 }
 
 if(isset($_POST["order"]))
@@ -17,7 +17,7 @@ if(isset($_POST["order"]))
 }
 else
 {
-	$query .= 'ORDER BY staffNumber DESC ';
+	$query .= 'ORDER BY studentName  ';
 }
 
 if($_POST["length"] != -1)
@@ -34,10 +34,11 @@ foreach($result as $row)
 {
 	
 	$sub_array = array();
-	$sub_array[] = $row["staffNumber"];;
-	$sub_array[] = $row["staffName"];
-	$sub_array[] = $row["staffEmail"];	
-	$sub_array[] = '<button type="button" name="delete" id="'.$row["staffNumber"].'" class="btn btn-danger btn-xs delete">Delete</button>';
+	$sub_array[] = $row["studentNumber"];;
+	$sub_array[] = $row["studentName"];
+	$sub_array[] = $row["studentEmail"];	
+	$sub_array[] = '<button type="button" name="delete" id="'.$row["studentNumber"].'" class="btn btn-danger btn-xs delete">Delete</button>';
+	$sub_array[] = '';
 
 	$sub_array[] = '';
 	$data[] = $sub_array;
@@ -45,7 +46,7 @@ foreach($result as $row)
 $output = array(
 	"draw"				=>	intval($_POST["draw"]),
 	"recordsTotal"		=> 	$filtered_rows,
-	"recordsFiltered"	=>	get_total_all_records(),
+	"recordsFiltered"	=>	get_all_student_records(),
 	"data"				=>	$data
 );
 echo json_encode($output);

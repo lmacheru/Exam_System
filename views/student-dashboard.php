@@ -72,7 +72,9 @@ include("../views/header.php");
 							<!--clockdiv shows the count downtimer on the upload Exam model-->
 							<br><br>
 							<div id="clockdiv"></div>
-							<br><br>								
+							<br><br>		
+								<a href="./ExamPaper/October_November_2022_online_examination.pdf" download="newfilename">  October_November_2022_online_examination.pdf</a>
+
 							<div class="modal-body">
 								<label>Enter Student Number</label>
 								<input type="text" name="Student_Num" id="Student_Num" class="form-control" value="<?php echo substr($_SESSION["username"],0,8);?>"/>
@@ -209,7 +211,7 @@ $(document).ready(function(){
 					var clock = document.getElementById(id);
 					function update_clock(){
 						var t = time_remaining(endtime);
-						clock.innerHTML = 'hour: ' +t.hours+ ' : '+t.minutes+' : '+t.seconds;
+						clock.innerHTML = '  Time: ' +t.hours+ ' : '+t.minutes+' : '+t.seconds;
 						
 						//check if the timmer is 0 and if its 0 update the test record and close the Exam modal
 						if(t.total<=0){ 

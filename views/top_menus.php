@@ -14,6 +14,10 @@ if($_SESSION["username"])
 	
 	if($_SESSION["role"] == 'Administrator') { ?>
 	
+			<button type="button" name="exam" id="exam" class="btn btn-info"  onclick='window.location.replace("Exam_Admin.php")'>
+			  Exam Dashboard
+			</button>
+			
 			<button type="button" name="exam" id="exam" class="btn btn-info"  onclick='window.location.replace("Lecture_Page.php")'>
 			  Schedule Exam
 			</button>
@@ -30,10 +34,7 @@ if($_SESSION["username"])
 			<button type="button" name="User" id="user" class="btn btn-info"  onclick='window.location.replace("ManageStudents.php")'>
 			  Manage Students
 			</button>	
-			
-			<button type="button" name="User" id="user" class="btn btn-info"  onclick='window.location.replace("ManageModules.php")'>
-			  Manage Modules
-			</button>
+
 			<?php }?>
 	
 	<?php if($_SESSION["role"] == 'Student') { ?>

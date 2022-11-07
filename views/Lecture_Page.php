@@ -1,5 +1,6 @@
 <?php
 include("../views/header.php");
+require_once "../models/connection.php";
 ?>
 <head>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
@@ -61,7 +62,7 @@ include("../views/header.php");
 					<th>Question Type</th>
 					<th>Exam Date</th>
 					<th>Module Code</th>					
-					<th></th>
+				
 					<th></th>					
 				</tr>
 			</thead>
@@ -86,7 +87,7 @@ include("../views/header.php");
 							<label for="Duration" class="control-label">Duration</label>
 							<select name="Duration" id="Duration" class="form-control">
 	                				<option value="">Select</option>
-									<option value="1">1 Minute</option>									
+									<option value="0.6">12 Seconds</option>									
 									<option value="3">3 Minute</option>								
 	                				<option value="30">30 Minute</option>
 	                				<option value="60">1 Hour</option>
@@ -129,10 +130,31 @@ include("../views/header.php");
 						  <label for="Examdate">Enter a date and time for Exam:</label>
 						  <input id="Examdate" class="form-control" type="datetime-local" name="Examdate" />
 						</div>
+												
 						<div class="form-group"
-							<label for="Module_Cod" class="control-label">Module Code</label>
-							<input type="text" class="form-control" id="Module_Cod" name="Module_Cod" placeholder="Module Code" required>			
-						</div>	
+							<label for="Module_Code" class="control-label">Module Code</label>
+							<?php
+							$result = $connect->query("SELECT moduleCode FROM moduleinfo");
+    
+								echo "<html>";
+								echo "<body>";
+								echo "<select name='Module_Cod' id='Module_Cod' class='form-control'>";
+								echo '<option value="">Select</option>';
+								
+								while ($row = $result->fetch_assoc()) {
+
+											  unset($id, $name);
+											  $id = $row['moduleCode'];
+											  
+											  
+											  echo '<option value="'.$id.'">'.$id.'</option>';
+											 
+							}
+
+								echo "</select>";
+
+							?>
+						</div>
 								
 					</div>
 					<div class="modal-footer">

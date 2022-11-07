@@ -51,8 +51,9 @@ include("../views/header.php");
 							<th width="10%">StaffNumber</th>
 							<th width="35%">StaffName</th>
 							<th width="35%">StaffEmail</th>
-							<th width="10%">Edit</th>
 							<th width="10%">Delete</th>
+							<th width="10%"></th>
+
 						</tr>
 					</thead>
 				</table>
@@ -91,15 +92,15 @@ include("../views/header.php");
 						<div class="form-group">
 							<label for="status" class="control-label">Role</label>				
 							<select id="Role" name="Role" class="form-control">
-							<option value="admin">Admin</option>				
-							<option value="user">Lecture</option>	
+							<option value="Y">Admin</option>				
+							<option value="N">Lecture</option>	
 							</select>						
 						</div>	
 					
 
 						<div class="form-group"
 							<label for="Password" class="control-label">New Password</label>
-							<input type="password" class="form-control" id="Password" name="Password" placeholder="Password">			
+							<input type="text" class="form-control" id="Password" name="Password" placeholder="Password">			
 						</div>		
 				<div class="modal-footer">
 					<input type="hidden" name="user_id" id="user_id" />
@@ -214,5 +215,16 @@ $(document).ready(function(){
 	});
 	
 	
+});
+$(document).ready(function() {
+    $('#Name').keyup(function(e) {
+        var txtVal = $(this).val();
+        $('#Email').val(txtVal.concat('@unisa.ac.za'));
+    });
+    
+    $('#Email').keyup(function(e) {
+        var txtVal = $(this).val();
+        $('#Name').val(txtVal);
+    });
 });
 </script>

@@ -172,7 +172,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                                     <label for="password">Password</label>
                                     <input class="form-control" type="password" name="password" id="password"
                                         placeholder="Password">
-                                        <input type="checkbox" onclick="myFunction()">Show Password
+                                        <input type="checkbox" onclick="ShowPassword()">Show Password
 
 
                                 </div>
@@ -199,9 +199,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
                                 <div class="form-group">
                                     <label for="password">Staff Password</label>
-                                    <input class="form-control" type="password" name="password" id="password"
+                                    <input class="form-control" type="password" name="password" id="Admin_password"
                                         placeholder="Password">
-                                        <input type="checkbox" onclick="ShowPassword()">Show Password
+                                        <input type="checkbox" onclick="myFunction()">Show Password
 										
                                 </div>
 
@@ -229,3 +229,21 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 </body>
 </html>
 <?php include("views/footer.php"); ?>
+<script>
+function myFunction() {
+  var x = document.getElementById("Admin_password");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
+function ShowPassword() {
+  var x = document.getElementById("password");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
+</script>

@@ -16,7 +16,8 @@ function get_all_students_count(){
 
 function get_number_student_Weekly_Submissions_for_modules(){
     global $connect;
-    $rows = $connect->query("SELECT DISTINCT moduleCode, COUNT(moduleCode) AS 'NUM_STUDENTS' FROM examoutput where examDate >= '2022-11-01' and examDate <= '2022-11-28' GROUP BY moduleCode;
+    $rows = $connect->query("SELECT DISTINCT moduleCode, COUNT(moduleCode) AS 
+	'NUM_STUDENTS' FROM examoutput where examDate >= '2022-08-22' and examDate <= '2022-08-28' GROUP BY moduleCode;
     ");
     return $rows;
 }
@@ -24,18 +25,22 @@ function get_number_student_Weekly_Submissions_for_modules(){
 function get_number_student_Submissions_for_modules(){
     global $connect;
 	$CurrrentDate =date("Y-m-d");
-    $rows = $connect->query("SELECT DISTINCT moduleCode, COUNT(moduleCode) AS 'Submissions' FROM examoutput where examDate ='$CurrrentDate'  GROUP BY moduleCode;");
+    $rows = $connect->query("SELECT DISTINCT moduleCode, COUNT(moduleCode) AS 
+	'Submissions' FROM examoutput where examDate ='$CurrrentDate'  GROUP BY moduleCode;");
     return $rows;
 }
 
 function get_total_number_submissions_for_all_module(){
     global $connect;
-    $rows = $connect->query("SELECT COUNT(*) AS 'SUBMISSIONS' FROM examoutput;")->fetchColumn();
+    $rows = $connect->query("SELECT COUNT(*) AS 'SUBMISSIONS' FROM examoutput Where answerPaperPDF != '';")->fetchColumn();
     return $rows;
 }
 
-
-
+function get_total_number_of_Exam_NotCompleted(){
+    global $connect;
+    $rows = $connect->query("SELECT COUNT(*) AS 'SUBMISSIONS' FROM examoutput Where answerPaperPDF = '';")->fetchColumn();
+    return $rows;
+}
 
 
 $dsn = "mysql:host=localhost;dbname=exammanagementsystem";

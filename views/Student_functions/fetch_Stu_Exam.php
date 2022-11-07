@@ -41,10 +41,10 @@ foreach($result as $row)
 	
 	//get Date and time to use when the exam button should be enabled 
 	date_default_timezone_set("Africa/Johannesburg");
-	$ExamStartime =date("Y-m-d h:i:s");
+	$ExamStartime =date("Y-m-d H:i:s");
 	
 	if($row["Status"] =='Completed' ||$row["Status"] == 'Not Completed' || $row["ExamDate"] >=$ExamStartime){
-	$sub_array[] = '<button type="button" name="Close" id="'.$row["Id"].'" class="bbtn btn-success" disabled>Closed</button>';
+	$sub_array[] = '<button type="button" name="Close" id="'.$row["Id"].'" class="bbtn btn-success" disabled>Closed </button>';
 	}
 	else{
 			$sub_array[] = '<button type="button" name="update" id="'.$row["Id"].'" class="btn btn-warning btn-xs update">Start Exam</button>';

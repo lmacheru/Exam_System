@@ -28,21 +28,23 @@ require_once "../models/connection.php";
 <?php include('top_menus.php'); ?>	
 				<div class="row">
 
-					<div class="col-md-12">
-						<h2>Admin Dashboard</h2>
-					</div>
 
 					<div class="col-md-7">
 						<h2>Other Report</h2>
-						<p>Number of student registered at UNISA</p>
+						<p>Number of students registed</p>
 						<b class="text-danger"><?php echo get_all_students_count(); ?> students</b>
 					</div>
 					<div class="col-md-4">
 						 <h2>Other Report</h2>
-						<p>Total student submission for all module</p>
+						<p>Exams for all modules Completed</p>
 						<b class="text-danger"><?php echo get_total_number_submissions_for_all_module(); ?> submissions</b>
+					
+					<p>Exams all modules Not Completed</p>
+						<b class="text-danger"><?php echo get_total_number_of_Exam_NotCompleted(); ?> submissions</b>
 					</div>
 
+
+					
 					<div class="col-md-5">
 					<h2>Daily</h2>
 						<p>Number of student submission for each module</p>
@@ -52,7 +54,7 @@ require_once "../models/connection.php";
 
 					<div class="col-md-5">
 						<h2>Weekly</h2>
-						<p>Number of student registered at for each UNISA module</p>
+						<p>Students who took exam for each UNISA module</p>
 						<canvas height="500" id="student-registeration"></canvas>
 					</div>
 				</div>
@@ -69,7 +71,14 @@ require_once "../models/connection.php";
   "#e8c3b9", 
   "#b91d47",
   "#00aba9",
-  "#1e7145"
+  "#8A2BE2",
+  "#A9A9A9",
+  "#FFFF00",
+  "#B22222",
+  "#FF69B4",
+  "#66CDAA",
+  "#FFA500",
+  "#8B4513"
 ];
         let register = document.getElementById('student-registeration').getContext('2d');
         let chart = new Chart(register, {
@@ -94,11 +103,18 @@ require_once "../models/connection.php";
     <script>
 	
 		var barColors = [
+  "#2b5797",
+  "#e8c3b9", 
   "#b91d47",
   "#00aba9",
-  "#2b5797",
-  "#e8c3b9",
-  "#1e7145"
+  "#8A2BE2",
+  "#A9A9A9",
+  "#FFFF00",
+  "#B22222",
+  "#FF69B4",
+  "#66CDAA",
+  "#FFA500",
+  "#8B4513"
 ];
 	
         let resp = document.getElementById('student-Submissions').getContext('2d');

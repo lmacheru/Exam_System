@@ -39,7 +39,6 @@ foreach($result as $row)
 	$sub_array[] = $row["ExamDate"];
 	$sub_array[] = $row["ModuleCode"];
 	
-	$sub_array[] = '<button type="button" name="update" id="'.$row["Id"].'" class="btn btn-warning btn-xs update">Update</button>';
 	$sub_array[] = '<button type="button" name="delete" id="'.$row["Id"].'" class="btn btn-danger btn-xs delete">Delete</button>';
 	$data[] = $sub_array;
 }

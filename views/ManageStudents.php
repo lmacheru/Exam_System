@@ -50,9 +50,9 @@ include("../views/header.php");
 						<tr>
 							<th width="10%">StaffNumber</th>
 							<th width="35%">StaffName</th>
-							<th width="35%">StaffEmail</th>
-							<th width="10%">Edit</th>
-							<th width="10%">Delete</th>
+							<th width="35%">studentEmail</th>
+							<th width="35%"></th>
+							<th width="35%"></th>
 						</tr>
 					</thead>
 				</table>
@@ -72,8 +72,8 @@ include("../views/header.php");
 				</div>
 				<div class="modal-body">
 						<div class="form-group"
-							<label for="StaffNumber" class="control-label">Staff Number*</label>
-							<input type="text" class="form-control" id="StaffNumber" name="StaffNumber" placeholder="Staff Number" required>			
+							<label for="StudentNumber" class="control-label">Student Number*</label>
+							<input type="text" class="form-control" id="StudentNumber" name="StudentNumber" placeholder="Student Number" required>			
 						</div>
 						
 						<div class="form-group"
@@ -85,21 +85,11 @@ include("../views/header.php");
 							<label for="username" class="control-label">Email*</label>
 							<input type="email" class="form-control" id="Email" name="Email" placeholder="Email" required>			
 						</div>
-						
-						
-						
-						<div class="form-group">
-							<label for="status" class="control-label">Role</label>				
-							<select id="Role" name="Role" class="form-control">
-							<option value="admin">Admin</option>				
-							<option value="user">Lecture</option>	
-							</select>						
-						</div>	
 					
-
+	
 						<div class="form-group"
 							<label for="Password" class="control-label">New Password</label>
-							<input type="password" class="form-control" id="Password" name="Password" placeholder="Password">			
+							<input type="text" class="form-control" id="Password" name="Password" placeholder="Password">			
 						</div>		
 				<div class="modal-footer">
 					<input type="hidden" name="user_id" id="user_id" />
@@ -125,7 +115,7 @@ $(document).ready(function(){
 		"serverSide":true,
 		"order":[],
 		"ajax":{
-			url:"Admin_functions/fetch_Staff.php",
+			url:"Lecture_functions/fetch_Student.php",
 			type:"POST"
 		},
 		"columnDefs":[
@@ -139,7 +129,7 @@ $(document).ready(function(){
 
 	$(document).on('submit', '#user_form', function(event){
 		event.preventDefault();
-		var StaffNumber = $('#StaffNumber').val();
+		var StaffNumber = $('#StudentNumber').val();
 		var Name = $('#Name').val();
 		var Email = $('#Email').val();
 		var Role = $('#Role').val();
@@ -148,7 +138,7 @@ $(document).ready(function(){
 		if(StaffNumber != '' && Name != '')
 		{
 			$.ajax({
-				url:"Admin_functions/insert_Staff.php",
+				url:"Lecture_functions/insert_Student.php",
 				method:'POST',
 				data:new FormData(this),
 				contentType:false,
@@ -168,33 +158,14 @@ $(document).ready(function(){
 		}
 	});
 	
-	$(document).on('click', '.update', function(){
-		var user_id = $(this).attr("id");
-		$.ajax({
-			url:"fetch_single.php",
-			method:"POST",
-			data:{user_id:user_id},
-			dataType:"json",
-			success:function(data)
-			{
-				$('#userModal').modal('show');
-				$('#first_name').val(data.first_name);
-				$('#last_name').val(data.last_name);
-				$('.modal-title').text("Edit User");
-				$('#user_id').val(user_id);
-				$('#user_uploaded_image').html(data.user_image);
-				$('#action').val("Edit");
-				$('#operation').val("Edit");
-			}
-		})
-	});
+
 	
 	$(document).on('click', '.delete', function(){
 		var user_id = $(this).attr("id");
 		if(confirm("Are you sure you want to delete this?"))
 		{
 			$.ajax({
-				url:"Admin_functions/delete_Staff.php",
+				url:"Lecture_functions/delete_Student.php",
 				method:"POST",
 				data:{user_id:user_id},
 				success:function(data)
@@ -214,5 +185,17 @@ $(document).ready(function(){
 	});
 	
 	
+});
+
+$(document).ready(function() {
+    $('#StudentNumber').keyup(function(e) {
+        var txtVal = $(this).val();
+        $('#Email').val(txtVal.concat('@mylife.unisa.ac.za'));
+    });
+    
+    $('#Email').keyup(function(e) {
+        var txtVal = $(this).val();
+        $('#StudentNumber').val(txtVal);
+    });
 });
 </script>
